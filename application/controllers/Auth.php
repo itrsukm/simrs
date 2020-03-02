@@ -56,13 +56,13 @@ class Auth extends CI_Controller
 				}
 			} else {
 				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-				email is not activated!
+				User tidak aktif!
 				</div>');
 				redirect('auth');
 			}
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-			email is not registered!
+			Email belum terdaftar!
 			</div>');
 			redirect('auth');
 		}
@@ -72,11 +72,11 @@ class Auth extends CI_Controller
 	{
 		$this->form_validation->set_rules('name', 'Nama', 'required|trim');
 		$this->form_validation->set_rules('email', 'E-Mail', 'required|trim|valid_email|is_unique[user.email]', [
-			'is_unique' => 'Email sudah terdaftar!'
+			'is_unique' => 'User sudah terdaftar!'
 		]);
 		$this->form_validation->set_rules('password1', 'password', 'required|trim|min_length[3]|matches[password2]', [
-			'matches' => 'password tidak sama',
-			'min_length' => 'kependekan'
+			'matches' => 'password tidak sama!',
+			'min_length' => 'panjang password kurang dari 3 karakter!'
 		]);
 		$this->form_validation->set_rules('password2', 'password', 'required|trim|matches[password1]');
 
@@ -111,7 +111,7 @@ class Auth extends CI_Controller
 		$this->session->unset_userdata('role_id');
 
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-		kamu telah keluar!
+		Anda telah keluar!
 		</div>');
 		redirect('auth');
 	}

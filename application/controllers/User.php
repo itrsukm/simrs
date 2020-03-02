@@ -41,7 +41,7 @@ class User extends CI_Controller
 			$new_password = $this->input->post('new_password1');
 			if (!password_verify($current_password, $data['user']['password'])) {
 				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-				wrong current password!
+				Password salah!
 				</div>');
 				redirect('user/changepassword');
 			} else {
@@ -58,7 +58,7 @@ class User extends CI_Controller
 					$this->db->update('user');
 
 					$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-					Password dirubah!
+					Password diubah!
 					</div>');
 					redirect('user/changepassword');
 				}

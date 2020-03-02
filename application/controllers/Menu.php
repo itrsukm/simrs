@@ -26,7 +26,7 @@ class Menu extends CI_Controller
 		} else {
 			$this->db->insert('user_menu', ['menu' => $this->input->post('menu')]);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-			Menu added
+			Menu ditambahkan.
 			</div>');
 			redirect('menu');
 		}
@@ -66,7 +66,7 @@ class Menu extends CI_Controller
 
 			$this->db->insert('user_sub_menu', $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-			Submenu added
+			Submenu ditambahkan.
 			</div>');
 			redirect('menu/submenu');
 		}

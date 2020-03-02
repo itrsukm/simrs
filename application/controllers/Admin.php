@@ -39,7 +39,7 @@ class Admin extends CI_Controller
 		} else {
 			$this->db->insert('role', ['role' => $this->input->post('role')]);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-			Role added
+			Role Telah ditambahkan.
 			</div>');
 			redirect('admin/role');
 		}
@@ -81,7 +81,7 @@ class Admin extends CI_Controller
 		}
 
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-		Access Changed!
+		Access telah diubah.
 		</div>');
 	}
 
@@ -116,7 +116,7 @@ class Admin extends CI_Controller
 			$this->db->where('id', $id);
 			$this->db->update('role');
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-			Role Edited
+			Role telah diubah.
 			</div>');
 			redirect('admin/role');
 		}
