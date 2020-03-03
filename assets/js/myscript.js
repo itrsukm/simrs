@@ -4,14 +4,14 @@ $('.form-check-input').on('click', function () {
 	const roleId = $(this).data('role');
 
 	$.ajax({
-		url: 'http://localhost/ci/admin/changeaccess',
+		url: 'http://localhost/ci-git/simrs/admin/changeaccess',
 		type: 'post',
 		data: {
 			menuId: menuId,
 			roleId: roleId
 		},
 		success: function () {
-			document.location.href = 'http://localhost/ci/admin/roleaccess/' + roleId;
+			document.location.href = 'http://localhost/ci-git/simrs/admin/roleaccess/' + roleId;
 		}
 	});
 });
@@ -21,7 +21,7 @@ $('.editrole').on('click', function () {
 	const id = $(this).data('id');
 
 	$.ajax({
-		url: 'http://localhost/ci/admin/geteditrole',
+		url: 'http://localhost/ci-git/simrs/admin/geteditrole',
 		data: {
 			id: id
 		},
