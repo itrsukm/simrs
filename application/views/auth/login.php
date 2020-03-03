@@ -26,16 +26,16 @@
 											<?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
 										</div>
 										<button type="submit" class="btn btn-primary btn-user btn-block">
-											Login
+											Masuk
 										</button>
 									</form>
-									<hr>
-									<div class="text-center">
+									<!-- <hr> -->
+									<!-- <div class="text-center">
 										<a class="small" href="forgot-password.html">Forgot Password?</a>
 									</div>
 									<div class="text-center">
 										<a class="small" href="<?= base_url('auth/registration') ?>">Create an Account!</a>
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>
