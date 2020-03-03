@@ -53,3 +53,44 @@ $('.tombol-hapus').on('click', function (e) {
 		}
 	});
 });
+
+// ambil data value di modal edit menu
+$('.editmenu').on('click', function () {
+	const id = $(this).data('id');
+
+	$.ajax({
+		url: 'http://localhost/ci-git/simrs/menu/geteditmenu',
+		data: {
+			id: id
+		},
+		method: 'post',
+		dataType: 'json',
+		success: function (data) {
+			$('#menuedit').val(data.menu);
+			$('#menueditid').val(data.id);
+		}
+	});
+});
+
+// ambil data value di modal edit submenu
+$('.editsubmenu').on('click', function () {
+	const id = $(this).data('id');
+
+	$.ajax({
+		url: 'http://localhost/ci-git/simrs/menu/geteditsubmenu',
+		data: {
+			id: id
+		},
+		method: 'post',
+		dataType: 'json',
+		success: function (data) {
+			// console.log(data);
+			$('#editsm_id').val(data.id);
+			$('#editsm_title').val(data.title);
+			$('#editsm_menu_id').val(data.menu_id);
+			$('#editsm_url').val(data.url);
+			$('#editsm_icon').val(data.icon);
+			$('#editsm_is_active').val(data.is_active);
+		}
+	});
+});

@@ -19,7 +19,7 @@
 				<?= $this->session->flashdata('message'); ?>
 
 
-				<a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubmenuModal">Add New Submenu</a>
+				<a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newSubmenuModal">Tambah Submenu</a>
 
 				<table class="table table-hover">
 					<thead>
@@ -44,8 +44,8 @@
 							<td><?= $sm['icon']; ?></td>
 							<td><?= $sm['is_active']; ?></td>
 							<td>
-								<a href="" class="badge badge-success">edit</a>
-								<a href="" class="badge badge-danger">delete</a>
+								<a href="" class="badge badge-success editsubmenu" data-toggle="modal" data-target="#editSubmenuModal" data-id="<?= $sm['id']; ?>">Ubah</a>
+								<a href="<?= base_url('menu/deletesubmenu/') . $sm['id']; ?>" class="badge badge-danger tombol-hapus">Hapus</a>
 							</td>
 						</tr>
 						<?php $i++; ?>
@@ -66,7 +66,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="newSubmenuModalLabel">Add New Submenu</h5>
+				<h5 class="modal-title" id="newSubmenuModalLabel">Tambah Submenu</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -74,7 +74,7 @@
 			<form action="<?= base_url('menu/submenu'); ?>" method="POST">
 				<div class="modal-body">
 					<div class="form-group">
-						<input type="text" class="form-control" id="title" name="title" placeholder="Submenu title">
+						<input type="text" class="form-control" id="title" name="title" placeholder="Judul Submenu">
 					</div>
 					<div class="form-group">
 						<select name="menu_id" id="menu_id" class="form-control">
@@ -102,7 +102,56 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Add</button>
+					<button type="submit" class="btn btn-primary">Tambah</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Modal edit-->
+<div class="modal fade" id="editSubmenuModal" tabindex="-1" role="dialog" aria-labelledby="editSubmenuModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editSubmenuModalLabel">Ubah Submenu</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="<?= base_url('menu/updatesubmenu'); ?>" method="POST">
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="hidden" class="form-control" id="editsm_id" name="id">
+						<input type="text" class="form-control" id="editsm_title" name="title" placeholder="Submenu title">
+					</div>
+					<div class="form-group">
+						<select name="menu_id" class="form-control" id="editsm_menu_id">
+							<option value="">Select Menu</option>
+							<?php foreach ($menu as $m) : ?>
+							<option value="<?= $m['id']; ?>"><?= $m['menu']; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="editsm_url" name="url" placeholder="Submenu url">
+					</div>
+					<div class="form-group">
+						<input type="text" class="form-control" id="editsm_icon" name="icon" placeholder="Submenu icon">
+					</div>
+					<div class="form-group">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="1" name="is_active" id="editsm_is_active" checked>
+							<label class="form-check-label" for="is_active">
+								Active
+							</label>
+						</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Ubah</button>
 				</div>
 			</form>
 		</div>

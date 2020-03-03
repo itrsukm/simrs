@@ -14,7 +14,7 @@
 				<?= $this->session->flashdata('message'); ?>
 
 
-				<a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newRoleModal">Add New Role</a>
+				<a href="" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newRoleModal">Tambah Role Baru</a>
 
 				<table class="table table-hover">
 					<thead>
@@ -32,8 +32,8 @@
 							<td><?= $r['role']; ?></td>
 							<td>
 								<a href="<?= base_url('admin/roleaccess/') . $r['id']; ?>" class="badge badge-warning">access</a>
-								<a href="" class="badge badge-success editrole" data-toggle="modal" data-target="#editRoleModal" data-id="<?= $r['id']; ?>">edit</a>
-								<a href="<?= base_url('admin/deleterole/') . $r['id']; ?>" class="badge badge-danger tombol-hapus">delete</a>
+								<a href="" class="badge badge-success editrole" data-toggle="modal" data-target="#editRoleModal" data-id="<?= $r['id']; ?>">Ubah</a>
+								<a href="<?= base_url('admin/deleterole/') . $r['id']; ?>" class="badge badge-danger tombol-hapus">Hapus</a>
 							</td>
 						</tr>
 						<?php $i++; ?>
@@ -53,7 +53,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="newRoleModalLabel">Add New Role</h5>
+				<h5 class="modal-title" id="newRoleModalLabel">Tambah Role Baru</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -61,12 +61,12 @@
 			<form action="<?= base_url('admin/role'); ?>" method="POST">
 				<div class="modal-body">
 					<div class="form-group">
-						<input type="text" class="form-control" id="role" name="role" placeholder="Role Name">
+						<input type="text" class="form-control" id="role" name="role" placeholder="Nama Role">
 					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Add</button>
+					<button type="submit" class="btn btn-primary">Tambah</button>
 				</div>
 			</form>
 		</div>
@@ -78,7 +78,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="editRoleModalLabel">Edit Role</h5>
+				<h5 class="modal-title" id="editRoleModalLabel">Ubah Role</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -92,7 +92,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Simpan</button>
+					<button type="submit" class="btn btn-primary">Ubah</button>
 				</div>
 			</form>
 		</div>
