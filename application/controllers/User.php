@@ -65,4 +65,21 @@ class User extends CI_Controller
 			}
 		}
 	}
+
+	public function addUser()
+	{
+		$data['title'] = 'Data User';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+		$data['datauser'] = $this->db->get('user')->result_array();
+
+		// $this->form_validation->set_rules('menu', 'Menu', 'required');
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('user/adduser', $data);
+			$this->load->view('templates/footer');
+		} else { }
+	}
 }
