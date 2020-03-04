@@ -70,9 +70,23 @@ class User extends CI_Controller
 	{
 		$data['title'] = 'Data User';
 		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-		$data['datauser'] = $this->db->get('user')->result_array();
 
-		// $this->form_validation->set_rules('menu', 'Menu', 'required');
+		$this->load->model('role_model', 'role');
+
+		$data['datauserrole'] = $this->role->getRole();
+		$data['role'] = $this->db->get('role')->result_array();
+
+		$this->form_validation->set_rules('user', 'Username', 'required|trim|valid_email|is_unique[user.email]', [
+			'is_unique' => 'User sudah terdaftar!'
+		]);
+		$this->form_validation->set_rules('name', 'Nama', 'required|trim');
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+			'matches' => 'password tidak sama!',
+			'min_length' => 'panjang password kurang dari 3 karakter!'
+		]);
+		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
+		$this->form_validation->set_rules('role', 'Role', 'required');
+
 
 		if ($this->form_validation->run() == false) {
 			$this->load->view('templates/header', $data);
@@ -80,6 +94,23 @@ class User extends CI_Controller
 			$this->load->view('templates/topbar', $data);
 			$this->load->view('user/adduser', $data);
 			$this->load->view('templates/footer');
-		} else { }
+		} else {
+			$data = [
+				'name' => $this->input->post('name', TRUE),
+				'email' => $this->input->post('user', TRUE),
+				'image' => 'default.jpg',
+				'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+				'role_id' => $this->input->post('role'),
+				'is_active' => 1,
+				'date_created' => time()
+			];
+
+			$this->db->insert('user', $data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			User telah dibuat!
+			</div>');
+
+			redirect('user/adduser');
+		}
 	}
 }

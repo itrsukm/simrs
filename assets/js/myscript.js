@@ -28,6 +28,7 @@ $('.editrole').on('click', function () {
 		method: 'post',
 		dataType: 'json',
 		success: function (data) {
+			// console.log(data);
 			$('#roleedit').val(data.role);
 			$('#idroleedit').val(data.id);
 		}
