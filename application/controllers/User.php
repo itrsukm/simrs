@@ -113,4 +113,73 @@ class User extends CI_Controller
 			redirect('user/adduser');
 		}
 	}
+
+	public function getEditUser()
+	{
+		$id = $this->input->post('id');
+		$data = $this->db->get_where('user', ['id' => $id])->row_array();
+
+		echo json_encode($data);
+	}
+
+	public function updateUser()
+	{
+		$data['title'] = 'Data User';
+		$data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+
+		$this->load->model('role_model', 'role');
+
+		$data['datauserrole'] = $this->role->getRole();
+		$data['role'] = $this->db->get('role')->result_array();
+
+		// // $this->form_validation->set_rules('user', 'Username', 'required|trim|valid_email|is_unique[user.email]', [
+		// 	'is_unique' => 'User sudah terdaftar!'
+		// ]);
+		$this->form_validation->set_rules('name', 'Nama', 'required|trim');
+		$this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
+			'matches' => 'password tidak sama!',
+			'min_length' => 'panjang password kurang dari 3 karakter!'
+		]);
+		$this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
+		$this->form_validation->set_rules('role', 'Role', 'required');
+
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('templates/header', $data);
+			$this->load->view('templates/sidebar', $data);
+			$this->load->view('templates/topbar', $data);
+			$this->load->view('user/adduser', $data);
+			$this->load->view('templates/footer');
+		} else {
+			$data = [
+				'id' => $this->input->post('id'),
+				'name' => $this->input->post('name'),
+				// 'email' => $this->input->post('user'),
+				'image' => 'default.jpg',
+				'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
+				'role_id' => $this->input->post('role'),
+				'is_active' => 1,
+				'date_created' => time()
+			];
+
+			$this->db->set($data);
+			$this->db->where('id', $data['id']);
+			$this->db->update('user');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			User telah diubah!
+			</div>');
+
+			redirect('user/adduser');
+		}
+	}
+
+	public function deleteUser($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete('user');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+			User telah dihapus!
+			</div>');
+		redirect('user/adduser');
+	}
 }

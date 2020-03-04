@@ -4,14 +4,14 @@ $('.form-check-input').on('click', function () {
 	const roleId = $(this).data('role');
 
 	$.ajax({
-		url: 'http://localhost/ci-git/simrs/admin/changeaccess',
+		url: base_url + "admin/changeaccess",
 		type: 'post',
 		data: {
 			menuId: menuId,
 			roleId: roleId
 		},
 		success: function () {
-			document.location.href = 'http://localhost/ci-git/simrs/admin/roleaccess/' + roleId;
+			document.location.href = base_url + "admin/roleaccess/" + roleId;
 		}
 	});
 });
@@ -21,7 +21,7 @@ $('.editrole').on('click', function () {
 	const id = $(this).data('id');
 
 	$.ajax({
-		url: 'http://localhost/ci-git/simrs/admin/geteditrole',
+		url: base_url + "admin/geteditrole",
 		data: {
 			id: id
 		},
@@ -60,7 +60,7 @@ $('.editmenu').on('click', function () {
 	const id = $(this).data('id');
 
 	$.ajax({
-		url: 'http://localhost/ci-git/simrs/menu/geteditmenu',
+		url: base_url + "menu/geteditmenu",
 		data: {
 			id: id
 		},
@@ -78,7 +78,7 @@ $('.editsubmenu').on('click', function () {
 	const id = $(this).data('id');
 
 	$.ajax({
-		url: 'http://localhost/ci-git/simrs/menu/geteditsubmenu',
+		url: base_url + "menu/geteditsubmenu",
 		data: {
 			id: id
 		},
@@ -92,6 +92,27 @@ $('.editsubmenu').on('click', function () {
 			$('#editsm_url').val(data.url);
 			$('#editsm_icon').val(data.icon);
 			$('#editsm_is_active').val(data.is_active);
+		}
+	});
+});
+
+// ambil data value di modal edit user
+$('.edituser').on('click', function () {
+	const id = $(this).data('id');
+
+	$.ajax({
+		url: base_url + "user/getedituser",
+		data: {
+			id: id
+		},
+		method: 'post',
+		dataType: 'json',
+		success: function (data) {
+			// console.log(data);
+			$('#editid').val(data.id);
+			$('#edituser').val(data.email);
+			$('#editname').val(data.name);
+			$('#editrole').val(data.role_id);
 		}
 	});
 });

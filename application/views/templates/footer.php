@@ -49,6 +49,10 @@
 <script src="<?= base_url('assets/'); ?>js/sb-admin-2.min.js"></script>
 <script src="<?= base_url('assets/'); ?>js/sweetalert2.all.min.js"></script>
 
+<script>
+	const base_url = "<?= base_url(); ?>";
+</script>
+
 <script src="<?= base_url('assets/'); ?>js/myscript.js"></script>
 
 </body>

@@ -40,8 +40,8 @@
 							<td><?= $du['role']; ?></td>
 							<td><?= $du['is_active']; ?></td>
 							<td>
-								<a href="" class="badge badge-success editmenu" data-toggle="modal" data-target="#editMenuModal" data-id="<?= $du['id']; ?>">Ubah</a>
-								<a href="<?= base_url('menu/deletemenu/') . $du['id']; ?>" class="badge badge-danger tombol-hapus">Hapus</a>
+								<a href="" class="badge badge-success edituser" data-toggle="modal" data-target="#editUserModal" data-id="<?= $du['id']; ?>">Ubah</a>
+								<a href="<?= base_url('user/deleteuser/') . $du['id']; ?>" class="badge badge-danger tombol-hapus">Hapus</a>
 							</td>
 						</tr>
 						<?php $i++; ?>
@@ -106,6 +106,64 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 					<button type="submit" class="btn btn-primary">Tambah</button>
+				</div>
+		</div>
+
+		</form>
+	</div>
+</div>
+
+
+<!-- Modal edit user-->
+<div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="editUserModalLabel">Ubah User</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="<?= base_url('user/updateuser'); ?>" method="POST">
+				<div class="modal-body">
+					<div class="form-group">
+						<input type="hidden" id="editid" name="id">
+						<label for="user">Username</label>
+						<input type="text" class="form-control" id="edituser" name="edituser" placeholder="Username@rsukm.com" disabled>
+					</div>
+					<div class="form-group">
+						<label for="name">Nama Pengguna</label>
+						<input type="text" class="form-control" id="editname" name="name" placeholder="Nama">
+					</div>
+					<div class="form-group">
+						<label for="password1">Password</label>
+						<input type="password" class="form-control" id="editpassword1" name="password1">
+					</div>
+					<div class="form-group">
+						<label for="password2">Ulangi Password</label>
+						<input type="password" class="form-control" id="editpassword2" name="password2">
+					</div>
+					<div class="form-group">
+						<label for="role">Pilih Role</label>
+						<select name="role" id="editrole" class="form-control">
+							<option value="">Select Menu</option>
+							<?php foreach ($role as $r) : ?>
+							<option value="<?= $r['id']; ?>"><?= $r['role']; ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+					<div class="form-group">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" value="1" name="is_active" id="editis_active" checked>
+							<label class="form-check-label" for="is_active">
+								Active
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Ubah</button>
 				</div>
 		</div>
 

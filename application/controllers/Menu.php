@@ -104,10 +104,10 @@ class Menu extends CI_Controller
 		} else {
 			$data = [
 				'id' => $this->input->post('id'),
-				'title' => $this->input->post('title'),
+				'title' => $this->input->post('title', TRUE),
 				'menu_id' => $this->input->post('menu_id'),
-				'url' => $this->input->post('url'),
-				'icon' => $this->input->post('icon'),
+				'url' => $this->input->post('url', TRUE),
+				'icon' => $this->input->post('icon', TRUE),
 				'is_active' => $this->input->post('is_active')
 			];
 
